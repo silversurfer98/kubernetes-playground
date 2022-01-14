@@ -1,0 +1,24 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: jupyter
+  namespace: default
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`k3s.home`)
+      kind: Rule
+      services:
+        - name: python-jupyter-deployment
+          port: 8888
+# use the app's port here
+  tls:
+    certResolver: pebble
+
+
+# apply this as kubectl create -f ingress.yaml
+
+# to delete ingress 
+# kubectl delete ingressroute <name>

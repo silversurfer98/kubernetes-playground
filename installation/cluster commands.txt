@@ -1,0 +1,18 @@
+#for master
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--node-ip=192.168.1.21 --flannel-iface=ens32" sh -s - --write-kubeconfig-mode 644 --disable servicelb --disable traefik
+
+#token
+sudo cat /var/lib/rancher/k3s/server/token
+K102b7f2476454648881ce719b20a08ae2868eba0661bb3d633bab329a7ed881488::server:68e98f0d2420dabd482c1b336d855184c9
+
+#for agent
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--node-ip=192.168.1.23 --flannel-iface=ens32" K3S_URL="https://192.168.1.21:6443" K3S_TOKEN="K102b7f2476454648881ce719b20a08ae2868eba0661bb3d633bab329a7ed881488::server:68e98f0d2420dabd482c1b336d855184" sh -s - --write-kubeconfig-mode 644 --disable servicelb --disable traefik
+
+
+
+#kubeconfig
+/etc/rancher/k3s/k3s.yaml
+
+
+
+https://www.youtube.com/watch?v=dEAtD9PVr_Q&list=PL34sAs7_26wNldKrBBY_uagluNKC9cCak&index=1

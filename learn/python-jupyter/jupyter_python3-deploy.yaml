@@ -1,0 +1,44 @@
+# kubectl create -f <deploy> -n mydev
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-jupyter-deployment
+  labels:
+    app: jupyter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jupyter
+  template:
+    metadata:
+      labels:
+        app: jupyter
+    spec:
+      containers:
+      - name: jupyter
+        image: jupyter/scipy-notebook
+        ports:
+        - containerPort: 8888
+        volumeMounts:
+        - name: test
+          mountPath: /home/jovyan/work
+      volumes:
+      - name: test
+        hostPath:
+          path: /mnt/hgfs/kubernetes
+
+
+#after deployment enable this as a service like
+# kubectl expose deploy <deploymeent name> --port <the port at which app is living>
+# then apply ingress
+
+# to know pods log
+# kubectl logs python-jupyter-deployment-86578944ff-2cmhd
+
+
+# delete deployment
+# kubectl delete svc <svc name>
+# kubectl delete deploy <deployment name>
+
+
