@@ -6,13 +6,8 @@ in local machine (windows)
     - helm repo add jetstack https://charts.jetstack.io
     - helm repo update
     * - kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.crds.yaml
-    - helm install \
-  cert-manager jetstack/cert-manager \
-  --namespace cert-manager \
-  --create-namespace \
-  --version v1.6.1 \
-  # --set installCRDs=true
-  # use this a --set flag if u are not using * above, helm will manage CRDs if its true
+    - helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.6.1 --set installCRDs=true
+    - use this a --set flag if u are not using * above, helm will manage CRDs if its true
 
 3. Create UR own CA (root) to sign all certs
     31. create a CA key to sign SSL certs 
