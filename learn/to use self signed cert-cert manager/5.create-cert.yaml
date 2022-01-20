@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: nginx-test-cert
+  namespace: mydev
+spec:
+  commonName: nginx-test-cert
+  secretName: nginx-test-cert
+  dnsNames:
+    - nginx.k3s.home
+  issuerRef:
+    name: ca-issuer
+    kind: Issuer
